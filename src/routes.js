@@ -16,6 +16,11 @@ import TaskFinishedByWorkerController from './app/controllers/Task/TaskFinishedB
 import TaskUnfinishedByWorkerController from './app/controllers/Task/TaskUnfinishedByWorkerController';
 import WorkerMobileController from './app/controllers/Worker/WorkerMobileController';
 import UserContactListController from './app/controllers/User/UserContactListController';
+import TaskMessageController from './app/controllers/Task/TaskMessageController';
+import TaskUserUnfinishedController from './app/controllers/Task/TaskUserUnfinishedController';
+import TaskUserFinishedController from './app/controllers/Task/TaskUserFinishedController';
+import TaskUserCanceledController from './app/controllers/Task/TaskUserCanceledController';
+import UserUpdateNoPhotoController from './app/controllers/User/UserUpdateNoPhotoController';
 
 import FileController from './app/controllers/FileController';
 import authMiddleware from './app/middlewares/auth';
@@ -38,6 +43,7 @@ routes.get('/tasks', TaskController.index);
 routes.get('/tasks/finished', TaskFinishedByWorkerController.index);
 routes.get('/tasks/unfinished', TaskUnfinishedByWorkerController.index);
 routes.put('/tasks/confirm/:id', TaskConfirmController.update);
+routes.put('/tasks/messages/:id', TaskMessageController.update);
 
 routes.get('/messages/web', MessageWebController.index);
 routes.get('/messages/web/task', MessageWebPerTaskController.index);
@@ -129,6 +135,7 @@ routes.use(authMiddleware);
 // -----------------------------------------------------------------------------
 
 routes.put('/users', UserController.update);
+routes.put('/users/no-photo', UserUpdateNoPhotoController.update);
 routes.get('/users', UserController.index);
 routes.delete('/users', UserController.delete);
 routes.post('/users/:id/contact-list', UserContactListController.store);
@@ -144,5 +151,9 @@ routes.delete('/tasks/:id', TaskController.delete);
 
 routes.get('/tasks/:id/details', TaskDetailController.index);
 routes.put('/tasks/:id/details', TaskDetailController.update);
+
+routes.get('/tasks/user/canceled', TaskUserCanceledController.index);
+routes.get('/tasks/user/unfinished', TaskUserUnfinishedController.index);
+routes.get('/tasks/user/finished', TaskUserFinishedController.index);
 
 export default routes;

@@ -91,41 +91,26 @@ class UserController {
         password ? field.required().oneOf([Yup.ref('password')]) : field
       ),
       phonenumber: Yup.string(),
-      email: Yup.string().email(),
+      // email: Yup.string().email(),
       birth_date: Yup.string(),
       gender: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Update failed' });
+      return res.status(400).json({ error: 'Erro nos dados' });
     }
 
+    // console.log(req.body)
     const { phonenumber, oldPassword } = req.body;
 
-    // const user = await User.findByPk(req.userId);
+    const user = await User.findByPk(req.userId);
     // %%%%%%%%%%%%%%%%%%%%%%%%%
     // console.log(req.userId);
-
-    const user = await User.findOne({
-      where: {
-        phonenumber: req.body.phonenumber,
-      },
-    });
-
-    // if (phonenumber !== user.phonenumber) {
-    //   const userExists = await User.findOne({ where: { phonenumber } });
-
-    //   if (userExists) {
-    //     return res
-    //       .status(400)
-    //       .json({ error: 'Update failed: User already exists.' });
-    //   }
-    // }
 
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
       return res
         .status(401)
-        .json({ error: 'User Update fail: Password does not match' });
+        .json({ error: 'Erro: A senha atual não confere.' });
     }
 
     await user.update(req.body);

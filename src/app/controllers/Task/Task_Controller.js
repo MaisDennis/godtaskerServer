@@ -58,6 +58,7 @@ class Task_Controller {
       description,
       sub_task_list,
       task_attributes,
+      messages: [],
       start_date,
       due_date,
     });
@@ -69,7 +70,7 @@ class Task_Controller {
   async index(req, res) {
     const { workerNameFilter, userID } = req.query;
     const tasks = await Task.findAll({
-      order: ['due_date'],
+      // order: ['due_date'],
       where: { user_id: userID },
       include: [
         {
@@ -97,12 +98,14 @@ class Task_Controller {
   // ---------------------------------------------------------------------------
   async update(req, res) {
     const { id } = req.params; // id: task_id
+
     const {
-      worker_id,
-      worker_name,
+      name,
       description,
       sub_task_list,
       task_attributes,
+      messages,
+      score,
       start_date,
       due_date,
     } = req.body;
@@ -110,11 +113,12 @@ class Task_Controller {
     let task = await Task.findByPk(id);
 
     task = await task.update({
-      worker_id,
-      worker_name,
+      name,
       description,
       sub_task_list,
       task_attributes,
+      messages,
+      score,
       start_date,
       due_date,
     });

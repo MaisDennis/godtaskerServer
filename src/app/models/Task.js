@@ -9,6 +9,7 @@ class Task extends Model {
         score: Sequelize.INTEGER,
         sub_task_list: Sequelize.JSON,
         task_attributes: Sequelize.JSON,
+        messages: Sequelize.JSON,
         start_date: Sequelize.DATE,
         due_date: Sequelize.DATE,
         end_date: Sequelize.DATE,

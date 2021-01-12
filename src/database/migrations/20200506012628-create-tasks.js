@@ -49,6 +49,10 @@ module.exports = {
         type: Sequelize.JSON,
         allowNull: true,
       },
+      messages: {
+        type: Sequelize.JSON,
+        allowNull: true,
+      },
       score: {
         type: Sequelize.INTEGER,
         allowNull: true,
