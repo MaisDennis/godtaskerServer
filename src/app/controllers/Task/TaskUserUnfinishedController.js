@@ -7,9 +7,11 @@ import User from '../../models/User';
 class TaskUserUnfinishedController {
   async index(req, res) {
     const { workerNameFilter, userID } = req.query;
+    console.log(req.query)
+    const parsedUserID = parseInt(userID)
     const tasks = await Task.findAll({
       // order: ['due_date'],
-      where: { user_id: userID, canceled_at: null, end_date: null },
+      where: { user_id: parsedUserID, canceled_at: null, end_date: null },
       include: [
         {
           model: Worker,

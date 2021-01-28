@@ -14,9 +14,9 @@ class TaskUnfinishedByWorkerController {
         {
           model: Worker,
           as: 'worker',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'worker_name'],
           where: {
-            name: {
+            worker_name: {
               [Op.like]: `%${test}%`,
             },
           },

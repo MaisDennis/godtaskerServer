@@ -36,6 +36,7 @@ const routes = new Router();
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 routes.get('/workers', WorkerController.index);
+routes.post('/workers', WorkerController.store);
 routes.put('/workers', WorkerController.update);
 routes.get('/workers/mobile', WorkerMobileController.index);
 
@@ -142,7 +143,7 @@ routes.post('/users/:id/contact-list', UserContactListController.store);
 routes.get('/users/:id/contact-list', UserContactListController.index);
 routes.delete('/users/:id/contact-list', UserContactListController.delete);
 
-routes.post('/workers', WorkerController.store);
+
 routes.delete('/workers', WorkerController.delete);
 
 routes.post('/tasks', TaskController.store);

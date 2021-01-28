@@ -19,6 +19,7 @@ class Task_Controller {
       },
       user_id,
     ] = req.body;
+    console.log(req.body);
 
     const user = await User.findByPk(user_id);
 
@@ -98,7 +99,7 @@ class Task_Controller {
   // ---------------------------------------------------------------------------
   async update(req, res) {
     const { id } = req.params; // id: task_id
-
+    console.log(id)
     const {
       name,
       description,

@@ -25,7 +25,8 @@ class WorkerController {
     if (!(await schema.isValid(req.body))) {
       return res
         .status(400)
-        .json({ error: 'Worker Create fail: schema error' });
+        // .json({ error: 'Worker Create fail: schema error' });
+        .json({ error: 'Erro nos dados.'})
     }
 
     const workerExists = await Worker.findOne({
@@ -34,7 +35,8 @@ class WorkerController {
     if (workerExists) {
       return res
         .status(400)
-        .json({ error: 'Worker Create fail: Phonenumber already exists.' });
+        // .json({ error: 'Worker Create fail: Phonenumber already exists.' });
+        .json({error: 'Erro: O número de celular já existe.'})
     }
 
     const {
