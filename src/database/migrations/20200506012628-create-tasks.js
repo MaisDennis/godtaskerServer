@@ -12,7 +12,7 @@ module.exports = {
         references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
+        allowNull: false,
       },
       userphonenumber: {
         type: Sequelize.STRING,
@@ -23,7 +23,7 @@ module.exports = {
         references: { model: 'workers', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
+        allowNull: false,
       },
       workerphonenumber: {
         type: Sequelize.STRING,
@@ -31,14 +31,10 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
+        allowNull: false,
       },
       description: {
         type: Sequelize.STRING(1234),
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
         allowNull: true,
       },
       sub_task_list: {
@@ -54,12 +50,24 @@ module.exports = {
         allowNull: true,
       },
       score: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.JSON,
+        allowNull: true,
+      },
+      status: {
+        type: Sequelize.JSON,
+        allowNull: true,
+      },
+      status_bar: {
+        type: Sequelize.FLOAT,
         allowNull: true,
       },
       start_date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
+      },
+      initiated_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
       },
       due_date: {
         type: Sequelize.DATE,

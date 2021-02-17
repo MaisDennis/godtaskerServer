@@ -6,11 +6,14 @@ class Task extends Model {
       {
         name: Sequelize.STRING,
         description: Sequelize.STRING(1234),
-        score: Sequelize.INTEGER,
         sub_task_list: Sequelize.JSON,
         task_attributes: Sequelize.JSON,
         messages: Sequelize.JSON,
+        score: Sequelize.INTEGER,
+        status: Sequelize.JSON,
+        status_bar: Sequelize.FLOAT,
         start_date: Sequelize.DATE,
+        initiated_at: Sequelize.DATE,
         due_date: Sequelize.DATE,
         end_date: Sequelize.DATE,
         canceled_at: Sequelize.DATE,
@@ -24,13 +27,10 @@ class Task extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
-    this.belongsTo(models.User, {
-      foreignKey: 'userphonenumber',
-    });
+    this.belongsTo(models.User, { foreignKey: 'userphonenumber' });
     this.belongsTo(models.Worker, { foreignKey: 'worker_id', as: 'worker' });
-    this.belongsTo(models.Worker, {
-      foreignKey: 'workerphonenumber',
-    });
+    this.belongsTo(models.Worker, { foreignKey: 'workerphonenumber' });
+    this.belongsTo(models.Message, { foreignKey: 'message_id', as: 'message' });
     this.belongsTo(models.Signature, {
       foreignKey: 'signature_id',
       as: 'signature',

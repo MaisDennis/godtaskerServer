@@ -11,6 +11,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      user_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       worker_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -19,19 +27,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      message_worker: {
-        type: Sequelize.STRING,
+      messages: {
+        type: Sequelize.JSON,
         allowNull: true,
-        unique: false,
-      },
-      message_user: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        unique: false,
       },
       created_at: {
         type: Sequelize.DATE,

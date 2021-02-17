@@ -49,6 +49,7 @@ class SessionController {
       birth_date,
       gender,
       avatar,
+      contact_list
     } = user;
 
     return res.json({
@@ -63,6 +64,7 @@ class SessionController {
         birth_date,
         gender,
         avatar,
+        contact_list
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,

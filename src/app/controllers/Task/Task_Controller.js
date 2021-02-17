@@ -4,6 +4,7 @@ import User from '../../models/User';
 import Task from '../../models/Task';
 import Worker from '../../models/Worker';
 import File from '../../models/File';
+import Message from '../../models/Message';
 // -----------------------------------------------------------------------------
 class Task_Controller {
   async store(req, res) {
@@ -14,12 +15,13 @@ class Task_Controller {
         description,
         sub_task_list,
         task_attributes,
+        // message_id,
         start_date,
         due_date,
       },
       user_id,
     ] = req.body;
-    console.log(req.body);
+
 
     const user = await User.findByPk(user_id);
 
@@ -50,6 +52,15 @@ class Task_Controller {
       return res.status(400).json({ error: 'Past dates are not permitted' });
     }
 
+    const message = await Message.create({
+      task_id: 1111,
+      worker_id: worker_id,
+      worker_name: worker.worker_name,
+      user_id: user.id,
+      user_name: user.user_name,
+      messages: [],
+    });
+
     const task = await Task.create({
       user_id,
       userphonenumber,
@@ -59,9 +70,20 @@ class Task_Controller {
       description,
       sub_task_list,
       task_attributes,
+      message_id: message.id,
       messages: [],
       start_date,
       due_date,
+    });
+
+    await Task.findByPk(req.taskId, {
+      include: [
+        {
+          model: Message,
+          as: 'message',
+          attributes: ['id'],
+        },
+      ],
     });
 
     return res.json(task);
@@ -99,7 +121,7 @@ class Task_Controller {
   // ---------------------------------------------------------------------------
   async update(req, res) {
     const { id } = req.params; // id: task_id
-    console.log(id)
+    // console.log(id)
     const {
       name,
       description,
@@ -121,6 +143,7 @@ class Task_Controller {
       messages,
       score,
       start_date,
+      canceled_at: null,
       due_date,
     });
 

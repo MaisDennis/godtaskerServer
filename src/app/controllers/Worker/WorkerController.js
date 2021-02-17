@@ -69,15 +69,25 @@ class WorkerController {
 
   // ---------------------------------------------------------------------------
   async update(req, res) {
-    let worker = await Worker.findOne({
-      where: {
-        phonenumber: req.body.phonenumber,
-      },
+    const { phonenumber}  = req.body;
+
+    const worker = await Worker.findOne({
+      where: { phonenumber: phonenumber },
     });
 
-    worker = await worker.update(req.body);
+    await worker.update(req.body);
 
-    return res.json(worker);
+    const { id, worker_name, avatar } = await Worker.findOne({
+      where: { phonenumber: phonenumber },
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+    return res.json({ id, worker_name, phonenumber, avatar });
   }
 
   // ---------------------------------------------------------------------------

@@ -81,17 +81,16 @@ class UserController {
       first_name: Yup.string(),
       last_name: Yup.string(),
       user_name: Yup.string(),
-      oldPassword: Yup.string().min(6),
+      oldPassword: Yup.string(),
       password: Yup.string()
-        .min(6)
         .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
+          oldPassword ? field.required().min(6) : field
         ),
       confirmPassword: Yup.string().when('password', (password, field) =>
         password ? field.required().oneOf([Yup.ref('password')]) : field
       ),
       phonenumber: Yup.string(),
-      // email: Yup.string().email(),
+      email: Yup.string(),
       birth_date: Yup.string(),
       gender: Yup.string(),
     });
@@ -104,8 +103,6 @@ class UserController {
     const { phonenumber, oldPassword } = req.body;
 
     const user = await User.findByPk(req.userId);
-    // %%%%%%%%%%%%%%%%%%%%%%%%%
-    // console.log(req.userId);
 
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
       return res
