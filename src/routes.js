@@ -1,9 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
 // -----------------------------------------------------------------------------
-// import MessageMobileController from './app/controllers/Message/MessageMobileController';
-// import MessageWebController from './app/controllers/Message/MessageWebController';
-// import MessageWebPerTaskController from './app/controllers/Message/MessageWebPerTaskController';
 import MessageController from './app/controllers/Message/MessageController';
 import MessageUserController from './app/controllers/Message/MessageUserController';
 import MessageWorkerController from './app/controllers/Message/MessageWorkerController';
@@ -21,7 +18,6 @@ import TaskDetailController from './app/controllers/Task/TaskDetailController';
 import TaskCancelController from './app/controllers/Task/TaskCancelController';
 import TaskUserNotificationController from './app/controllers/Task/TaskUserNotificationController';
 import TaskWorkerNotificationController from './app/controllers/Task/TaskWorkerNotificationController';
-
 
 import TaskWorkerFinishedController from './app/controllers/Task/TaskWorkerFinishedController';
 import TaskWorkerUnfinishedController from './app/controllers/Task/TaskWorkerUnfinishedController';
@@ -55,19 +51,14 @@ import signatureImgUpload from './app/middlewares/signature';
 // -----------------------------------------------------------------------------
 const routes = new Router();
 // const upload = multer(multerConfig);
-// routes.get('/messages/web', MessageWebController.index);
-// routes.get('/messages/web/task', MessageWebPerTaskController.index);
-// routes.post('/messages/mobile/:id', MessageMobileController.store);
 routes.post('/messages', MessageController.store);
 routes.put('/messages/:id', MessageController.update);
 routes.put('/messages/:id/user', MessageUserController.update);
 routes.put('/messages/:id/worker', MessageWorkerController.update);
 
-
 routes.get('/messages/:id', MessageController.index);
-routes.delete('/messages/:id', MessageController.delete);
-routes.put('/messages/remove/:id', MessageRemoveController.update);
 routes.put('/messages/update/:id', MessageUpdateController.update);
+routes.put('/messages/remove/:id', MessageRemoveController.update);
 
 routes.post('/sessions', SessionController.store);
 

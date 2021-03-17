@@ -21,6 +21,9 @@ class WorkerController {
         .required(),
       birth_date: Yup.string(),
       gender: Yup.string(),
+      bio: Yup.string(),
+      instagram: Yup.string(),
+      linkedin: Yup.string(),
     });
     if (!(await schema.isValid(req.body))) {
       return res
@@ -50,6 +53,9 @@ class WorkerController {
       email,
       birth_date,
       gender,
+      bio,
+      instagram,
+      linkedin,
     } = req.body;
 
     const worker = await Worker.create({
@@ -63,6 +69,9 @@ class WorkerController {
       email,
       birth_date,
       gender,
+      bio,
+      instagram,
+      linkedin,
     });
     return res.json(worker);
   }

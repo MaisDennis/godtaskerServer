@@ -20,6 +20,9 @@ class UserController {
         .required(),
       birth_date: Yup.string(),
       gender: Yup.string(),
+      bio: Yup.string(),
+      instagram: Yup.string(),
+      linkedin: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -60,6 +63,9 @@ class UserController {
       email,
       birth_date,
       gender,
+      bio,
+      instagram,
+      linkedin,
     } = await User.create(req.body);
 
     return res.json({
@@ -72,6 +78,9 @@ class UserController {
       email,
       birth_date,
       gender,
+      bio,
+      instagram,
+      linkedin,
     });
   }
 

@@ -2,11 +2,7 @@ import Message from '../../models/Message';
 import Task from '../../models/Task';
 import Worker from '../../models/Worker';
 import firebaseAdmin from 'firebase-admin'
-
 // import Notification from '../../schemas/Notification';
-// import Worker from '../../models/Worker';
-// import User from '../../models/User';
-
 class MessageController {
   async store(req, res) {
     const {
@@ -30,21 +26,12 @@ class MessageController {
 
     const messages = await Message.findByPk(id)
 
-    // const messages = await Message.findOne({
-    //   where: {
-    //     task_id: id,
-    //     canceled_at: null,
-    //   },
-    // });
-
     return res.json(messages);
   }
   // ---------------------------------------------------------------------------
   async update(req, res) {
     const { id } = req.params;
     const { messages, task_id } = req.body;
-
-
 
     let message = await Message.findByPk(id);
 
@@ -96,17 +83,6 @@ class MessageController {
     //   })
 
     return res.json(message);
-  }
-  // ---------------------------------------------------------------------------
-  async delete(req, res) {
-    const { id } = req.params;
-    let messages = await Message.findByPk(id);
-
-    messages = await messages.update({
-      canceled_at: new Date(),
-    });
-
-    return res.json(messages);
   }
 }
 export default new MessageController();
