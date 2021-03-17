@@ -1,4 +1,8 @@
 import Message from '../../models/Message';
+import Task from '../../models/Task';
+import Worker from '../../models/Worker';
+import firebaseAdmin from 'firebase-admin'
+
 // import Notification from '../../schemas/Notification';
 // import Worker from '../../models/Worker';
 // import User from '../../models/User';
@@ -38,7 +42,9 @@ class MessageController {
   // ---------------------------------------------------------------------------
   async update(req, res) {
     const { id } = req.params;
-    const { messages } = req.body;
+    const { messages, task_id } = req.body;
+
+
 
     let message = await Message.findByPk(id);
 
@@ -47,6 +53,47 @@ class MessageController {
     message = await message.update({
       messages: message.messages,
     });
+
+    // Firebase Notification ***************************************************
+    // const formattedDate = fdate =>
+    // fdate == null
+    //   ? ''
+    //   : format(fdate, "dd'/'MMM'/'yyyy HH:mm", { locale: ptBR });
+
+    // const task = await Task.findByPk(task_id)
+    // const worker = await Worker.findByPk(message.worker_id)
+
+
+    // const pushMessage = {
+    //   notification: {
+    //     title: `Message for task: ${task.name}`,
+    //     body: `${task.due_date}`
+    //   },
+    //   data: {
+
+    //   },
+    //   android: {
+    //     notification: {
+    //       sound: 'default'
+    //     }
+    //   },
+    //   apns: {
+    //     payload: {
+    //       aps: {
+    //         sound: 'default'
+    //       }
+    //     }
+    //   },
+    //   token: worker.notification_token
+    // };
+
+    // firebaseAdmin.messaging().send(pushMessage)
+    //   .then(response => {
+    //     console.log('Successfully sent message: ', response);
+    //   })
+    //   .catch(error => {
+    //     console.log('Error sending message: ', error);
+    //   })
 
     return res.json(message);
   }

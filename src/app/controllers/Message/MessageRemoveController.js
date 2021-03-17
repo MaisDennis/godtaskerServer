@@ -1,5 +1,8 @@
-import Message from '../../models/Message';
+import firebase from '../../../config/firebase'
+import 'firebase/firestore'
+import 'firebase/auth'
 
+import Message from '../../models/Message';
 class MessageRemoveController {
   async update(req, res) {
     const { id } = req.params;
@@ -16,6 +19,8 @@ class MessageRemoveController {
     message = await message.update({
       messages: message.messages,
     });
+
+
 
     return res.json(message);
   }

@@ -32,6 +32,13 @@ class TaskUserCanceledController {
           model: User,
           as: 'user',
           attributes: ['id', 'user_name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['name', 'path', 'url'],
+            },
+          ],
         },
       ],
     });

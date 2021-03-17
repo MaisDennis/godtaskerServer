@@ -13,6 +13,7 @@ class Worker extends Model {
         email: Sequelize.STRING,
         birth_date: Sequelize.STRING,
         gender: Sequelize.STRING,
+        notification_token: Sequelize.STRING,
         canceled_at: Sequelize.DATE,
         deleted_phonenumber: Sequelize.STRING,
         deleted_email: Sequelize.STRING,

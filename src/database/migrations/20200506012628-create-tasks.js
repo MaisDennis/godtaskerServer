@@ -61,6 +61,18 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
+      confirm_photo: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
+      unread_user: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      unread_worker: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       start_date: {
         type: Sequelize.DATE,
         allowNull: true,
@@ -74,6 +86,10 @@ module.exports = {
         allowNull: true,
       },
       end_date: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      messaged_at: {
         type: Sequelize.DATE,
         allowNull: true,
       },

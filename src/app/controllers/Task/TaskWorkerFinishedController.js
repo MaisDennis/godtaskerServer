@@ -3,6 +3,7 @@ import Task from '../../models/Task';
 import Worker from '../../models/Worker';
 import File from '../../models/File';
 import User from '../../models/User';
+import Signature from '../../models/Signature';
 // -----------------------------------------------------------------------------
 class TaskWorkerFinishedController {
   async index(req, res) {
@@ -33,6 +34,18 @@ class TaskWorkerFinishedController {
           model: User,
           as: 'user',
           attributes: ['id', 'user_name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['name', 'path', 'url'],
+            },
+          ],
+        },
+        {
+          model: Signature,
+          as: 'signature',
+          attributes: ['name', 'path', 'url'],
         },
       ],
     });

@@ -62,6 +62,10 @@ module.exports = {
         type: Sequelize.JSON,
         allowNull: true,
       },
+      notification_token: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       deleted_phonenumber: {
         type: Sequelize.STRING,
         allowNull: true,

@@ -5,7 +5,10 @@ import multer from 'multer';
 // import MessageWebController from './app/controllers/Message/MessageWebController';
 // import MessageWebPerTaskController from './app/controllers/Message/MessageWebPerTaskController';
 import MessageController from './app/controllers/Message/MessageController';
+import MessageUserController from './app/controllers/Message/MessageUserController';
+import MessageWorkerController from './app/controllers/Message/MessageWorkerController';
 import MessageRemoveController from './app/controllers/Message/MessageRemoveController';
+import MessageUpdateController from './app/controllers/Message/MessageUpdateController';
 
 import NotificationController from './app/controllers/NotificationController';
 
@@ -15,6 +18,10 @@ import SignatureController from './app/controllers/SignatureController';
 import TaskConfirmController from './app/controllers/Task/TaskConfirmController';
 import TaskController from './app/controllers/Task/Task_Controller';
 import TaskDetailController from './app/controllers/Task/TaskDetailController';
+import TaskCancelController from './app/controllers/Task/TaskCancelController';
+import TaskUserNotificationController from './app/controllers/Task/TaskUserNotificationController';
+import TaskWorkerNotificationController from './app/controllers/Task/TaskWorkerNotificationController';
+
 
 import TaskWorkerFinishedController from './app/controllers/Task/TaskWorkerFinishedController';
 import TaskWorkerUnfinishedController from './app/controllers/Task/TaskWorkerUnfinishedController';
@@ -30,11 +37,13 @@ import UserController from './app/controllers/User/UserController';
 import UserContactListController from './app/controllers/User/UserContactListController';
 import UserContactListRemoveController from './app/controllers/User/UserContactListRemoveController';
 import UserUpdateNoPhotoController from './app/controllers/User/UserUpdateNoPhotoController';
+import UserNotificationController from './app/controllers/User/UserNotificationController';
 
 import WorkerMobileController from './app/controllers/Worker/WorkerMobileController';
 import WorkerController from './app/controllers/Worker/WorkerController';
 import WorkerUpdateNoPhotoController from './app/controllers/Worker/WorkerUpdateNoPhotoController';
 import WorkerIndividualController from './app/controllers/Worker/WorkerIndividualController';
+import WorkerNotificationController from './app/controllers/Worker/WorkerNotificationController';
 
 import FileController from './app/controllers/FileController';
 import authMiddleware from './app/middlewares/auth';
@@ -51,14 +60,19 @@ const routes = new Router();
 // routes.post('/messages/mobile/:id', MessageMobileController.store);
 routes.post('/messages', MessageController.store);
 routes.put('/messages/:id', MessageController.update);
+routes.put('/messages/:id/user', MessageUserController.update);
+routes.put('/messages/:id/worker', MessageWorkerController.update);
+
+
 routes.get('/messages/:id', MessageController.index);
 routes.delete('/messages/:id', MessageController.delete);
 routes.put('/messages/remove/:id', MessageRemoveController.update);
+routes.put('/messages/update/:id', MessageUpdateController.update);
 
 routes.post('/sessions', SessionController.store);
 
 routes.get('/tasks', TaskController.index);
-routes.delete('/tasks/:id', TaskController.delete);
+
 routes.put('/tasks/messages/:id', TaskMessageController.update);
 
 routes.get('/tasks/finished', TaskWorkerFinishedController.index);
@@ -162,14 +176,19 @@ routes.use(authMiddleware);
 
 routes.post('/tasks', TaskController.store);
 routes.put('/tasks/:id', TaskController.update);
+routes.put('/tasks/:id/notification/user', TaskUserNotificationController.update);
+routes.put('/tasks/:id/notification/worker', TaskWorkerNotificationController.update);
 routes.get('/tasks/:id/details', TaskDetailController.index);
 routes.put('/tasks/:id/details', TaskDetailController.update);
+routes.put('/tasks/:id/cancel', TaskCancelController.update);
+routes.delete('/tasks/:id', TaskController.delete);
 
 routes.get('/tasks/user/canceled', TaskUserCanceledController.index);
 routes.get('/tasks/user/unfinished', TaskUserUnfinishedController.index);
 routes.get('/tasks/user/finished', TaskUserFinishedController.index);
 
 routes.put('/users', UserController.update);
+routes.put('/users/:id/notifications', UserNotificationController.update);
 routes.get('/users', UserController.index);
 routes.delete('/users', UserController.delete);
 routes.put('/users/no-photo', UserUpdateNoPhotoController.update);
@@ -181,5 +200,6 @@ routes.delete('/users/:id/contact-list', UserContactListController.delete);
 routes.put('/users/:id/remove-contact', UserContactListRemoveController.update);
 
 routes.delete('/workers', WorkerController.delete);
+routes.put('/workers/:id/notifications', WorkerNotificationController.update);
 
 export default routes;

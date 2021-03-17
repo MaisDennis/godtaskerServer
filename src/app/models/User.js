@@ -15,6 +15,7 @@ class User extends Model {
         email: Sequelize.STRING,
         birth_date: Sequelize.STRING,
         gender: Sequelize.STRING,
+        notification_token: Sequelize.STRING,
         canceled_at: Sequelize.DATE,
         contact_list: Sequelize.JSON,
         deleted_phonenumber: Sequelize.STRING,
